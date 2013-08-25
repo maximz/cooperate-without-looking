@@ -22,7 +22,7 @@ Examples:
 import sys, os
 import numpy as np
 import matplotlib
-matplotlib.use("pdf")
+matplotlib.use("pdf") # save as PDFs
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 from collections import defaultdict
@@ -30,6 +30,7 @@ from random import sample as random_sample
 from math import floor
 import cPickle as pickle
 
+# Choose whether to recalculate or to used saved data
 
 Calculate = False
 if __name__ == "__main__":
@@ -370,8 +371,13 @@ def clear_past_figs():
     #del f, fig_all
     #gc.collect()
 
+def export_graph(f_i, f_name):
+    #f_i.savefig(output_dir+f_name+'.png',dpi=300)
+    #f_i.savefig(output_dir+f_name+'.png',dpi=600)
+    f_i.savefig(output_dir+f_name+'.pdf', dpi=600) # This one looks the best
+    print f_name, 'exported as pdf at 600 dpi.' # 300dpi_png, 600dpi_png, 
 	
-# Figure 2 calculations:
+# Figure 2B and 2C calculations:
 
 print 'Calculating or loading values for Figure 2B and Figure 2C'
 
@@ -453,12 +459,7 @@ def process_ax(ax):
         print 'three', dupla, a_interval_tight[dupla[0]], a_interval_tight[dupla[1]]
 		
 		
-def export_graph(f_i, f_name):
-    #f_i.savefig(output_dir+f_name+'.png',dpi=300)
-    #f_i.savefig(output_dir+f_name+'.png',dpi=600)
-    f_i.savefig(output_dir+f_name+'.pdf', dpi=600) # This one looks the best
-    print f_name, 'exported as pdf at 600 dpi.' # 300dpi_png, 600dpi_png, 
-	
+
 
 avoid_end = -1 # remove last 1 point
 
@@ -558,10 +559,10 @@ if Calculate:
 	x_0 = get_random_point_inside_simplex(4)  # random frequency
 	y_0 = get_random_point_inside_simplex(3)  # random frequency
 	t_vector = np.linspace(0.0, 30.0, 1000) # time values
-	parameters_saved = [x_0, y_0, t_vector, tolerance_current, b, c1, c2, d, p, w, a_selected] # a_selected is not necessary
+	parameters_saved = [x_0, y_0, t_vector, tolerance_current, b, c1, c2, d, p, w] # a_selected is not necessary
 	pickle.dump( parameters_saved, open( output_dir+"Figure 2_A_single simulation run of strategy replicator trajectories.saved_data", "wb" ) )
 else: # load previous working version
-	(x_0, y_0, t_vector, tolerance_current, b, c1, c2, d, p, w, a_selected) = pickle.load(open(output_dir+"Figure 2_A_single simulation run of strategy replicator trajectories.saved_data", "r"))
+	(x_0, y_0, t_vector, tolerance_current, b, c1, c2, d, p, w) = pickle.load(open(output_dir+"Figure 2_A_single simulation run of strategy replicator trajectories.saved_data", "r"))
 	
 # Begin plot:
 
