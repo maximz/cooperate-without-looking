@@ -44,6 +44,7 @@ if __name__ == "__main__":
 output_dir = '../bin/'
 
 print 'Welcome to the CW(O)L Simulations and Figures toolkit.'
+print
 
 #######################################################
 #######################################################
@@ -467,7 +468,7 @@ avoid_end = -1 # remove last 1 point
 #######################################################
 
 ### PLOT FIGURE 2(B): Frequency vs. a-value
-
+print
 print 'Plotting Figure 2B'
 
 clear_past_figs()
@@ -492,7 +493,7 @@ export_graph(f, 'Figure_2B')
 
 
 ### PLOT FIGURE 2(C): Average frequency of strategies for players 1 and 2
-
+print
 print 'Plotting Figure 2C'
 
 clear_past_figs()
@@ -535,7 +536,7 @@ export_graph(fig_all, 'Figure_2C')
 
 
 ### PLOT FIGURE 2(A): Player 1 and 2 strategy replicator trajectories from single simulation run
-
+print
 print 'Calculating or loading values for Figure 2A'
 
 # Decide which a-values to use and plot.
@@ -550,7 +551,7 @@ a_selected = list(get_a_value_from_interval([one_equilibrium_region[0], two_equi
 # This setup supports having multiple columns, i.e. one column for each a-value.
 # The below is currently configured to hide all but the second column - however, we could easily disable this to return to all-column view, simply by commenting out the following line:
 a_selected = a_selected[1:2]
-print a_selected
+print 'Using these a-values:', a_selected
 
 # Randomly seed strategy frequencies:
 
@@ -565,7 +566,7 @@ else: # load previous working version
 	(x_0, y_0, t_vector, tolerance_current, b, c1, c2, d, p, w) = pickle.load(open(output_dir+"Figure 2_A_single simulation run of strategy replicator trajectories.saved_data", "r"))
 	
 # Begin plot:
-
+print
 print 'Plotting Figure 2A'
 
 clear_past_figs()
@@ -607,5 +608,5 @@ export_graph(fig_all, 'Figure_2A')
 #######################################################
 #######################################################
 
-
+print
 print 'CW(O)L Simulation Calculations and Figures Complete.'
