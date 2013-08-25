@@ -537,6 +537,20 @@ export_graph(fig_all, 'Figure_2C')
 
 print 'Calculating or loading values for Figure 2A'
 
+# Decide which a-values to use and plot.
+
+def get_a_value_from_interval(bounds):
+    for (bound_x, bound_y) in bounds:
+        i_chosen = int(floor((bound_x+bound_y)/2.0))
+        yield a_interval_tight[i_chosen]
+
+
+a_selected = list(get_a_value_from_interval([one_equilibrium_region[0], two_equilibria_region[0], three_equilibria_region[0]]))
+# This setup supports having multiple columns, i.e. one column for each a-value.
+# The below is currently configured to hide all but the second column - however, we could easily disable this to return to all-column view, simply by commenting out the following line:
+a_selected = a_selected[1:2]
+print a_selected
+
 # Randomly seed strategy frequencies:
 
 if Calculate:
@@ -554,17 +568,6 @@ else: # load previous working version
 print 'Plotting Figure 2A'
 
 clear_past_figs()
-
-def get_a_value_from_interval(bounds):
-    for (bound_x, bound_y) in bounds:
-        i_chosen = int(floor((bound_x+bound_y)/2.0))
-        yield a_interval_tight[i_chosen]
-
-a_selected = list(get_a_value_from_interval([one_equilibrium_region[0], two_equilibria_region[0], three_equilibria_region[0]]))
-# This setup supports having multiple columns, i.e. one column for each a-value.
-# The below is currently configured to hide all but the second column - however, we could easily disable this to return to all-column view, simply by commenting out the following line:
-a_selected = a_selected[1:2]
-print a_selected
 
 fig_all, ax_arr = plt.subplots(2,len(a_selected), sharex=False, sharey=False, figsize=(10,20)) # make 2 rows x 3 columns grid of subplots; (30, 20) size when 3x2
 
